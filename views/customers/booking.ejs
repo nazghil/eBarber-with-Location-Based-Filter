@@ -1,0 +1,246 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+
+<!-- <body>
+  <div>
+    <h3>Customer info</h3>
+    <p><%= data.username %></p>
+    <h3>Barbershop info</h3>
+    <p><%= data1.barbershopName %></p>
+  </div>
+  <form method="post" action="/api/customers/booking">
+    <label>Date</label>
+    <input type="date" name="bookDate">
+    <label>Time</label>
+    <input type="time" name="bookTime">
+    <input type="text" name="emailB" value="<%= data1.email %>" hidden>
+    <input type="text" name="emailC" value="<%= data.email %>" hidden>
+    <button type="submit">Submit</button>
+  </form>
+</body> -->
+
+<style>
+  html {
+  height: 100%;
+}
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: linear-gradient(#40506e, #202a36);
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #82cace;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #82cace;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+.login-box a:hover {
+  background: #5a8964;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #5a8964,
+              0 0 25px #5a8964,
+              0 0 50px #5a8964,
+              0 0 100px #5a8964;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.login-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #5a8964);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.login-box a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #5a8964);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.login-box a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #5a8964);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #5a8964);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: rgb(255, 255, 255) !important;
+}
+
+input[type=time]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=time]:focus::-webkit-datetime-edit {
+    color: rgb(255, 255, 255) !important;
+}
+
+button {
+  display: block;
+  background: transparent;
+	border: 0;
+	width: 100%;
+	color: #5a8964;
+  display: block;
+	width: auto;
+	color: #5a8964;
+	cursor: pointer;
+  letter-spacing: 0.3em;
+}
+</style>
+
+<div class="login-box">
+  <h2>Almost There !</h2>
+  <form method="post" action="/api/customers/booking">
+    <div class="user-box">
+      <input type="date" name="bookDate" required>
+      <label>Date</label>
+    </div>
+    <div class="user-box">
+      <input type="time" name="bookTime" required>
+      <label>Time</label>
+    </div>
+    <div class="user-box">
+      <input type="text" name="emailB" value="<%= data1.email %>" hidden>
+      <input type="text" name="emailC" value="<%= data.email %>" hidden>
+    </div>
+    <a>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <button type="submit">SUBMIT</button>
+    </a>
+  </form>
+</div>

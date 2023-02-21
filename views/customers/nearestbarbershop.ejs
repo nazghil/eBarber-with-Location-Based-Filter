@@ -1,0 +1,165 @@
+<!-- <%- include ("../partials/navbar.ejs") -%> -->
+
+<!-- leaflet css  -->
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+/>
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+/>
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.css"
+/>
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+/>
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.4/dist/L.Control.Locate.min.css"
+/>
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+/>
+<link href="src/AnimatedSearchBox.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+<!-- leaflet js  -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js"
+charset="utf-8"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.js"
+charset="utf-8"
+></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<style>
+    #map {
+        align-content: center;
+        position: absolute;
+        width: 88%;
+        padding: 80px;
+        padding-top: 470px;
+        padding-bottom: 300px;
+        border: 2px solid black;
+    }
+
+    h3{
+        color: rgb(255, 255, 255);
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: black;
+        text-align: center;
+    }
+
+    p{
+        color: black;
+        font-family:'Courier New', Courier, monospace;
+        letter-spacing: 0.1em;
+    }
+
+/* button */
+.button-6 {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+} 
+</style>
+
+    <div id="map"></div>
+
+<!-- //script -->
+<script>
+    // Map initialization
+    var map = L.map("map").setView([3.054855, 101.49112], 15);
+
+    //osm layer
+    var osm = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }
+    );
+    osm.addTo(map);
+    L.control.locate(location).addTo(map);
+
+    L.Control.geocoder().addTo(map);
+    
+</script>
+<% for(let barber of data){ %>
+    <script>
+        
+        var lat = "<%= barber.lat %>";
+        var long = "<%= barber.long %>";
+        var emailB = "<%= barber.email %>";
+        // console.log(emailP);
+
+        //standard marker
+        L.marker([lat, long]).addTo(map).bounce();
+        var marker = L.marker([lat, long]);
+        
+        marker
+            .bindPopup(
+                `<h3><%= barber.barbershopName %></h3>
+                <p>Address:<br><%= barber.barbershopAddress %></p>
+                <p>Contact:<br><%= barber.barbershopContact %></p>
+                <br>
+                <form method='get' action='/customers/booking/<%= barber.email %>'><button class='button-6' type='submit'>Book</button></form>`
+            )
+            .addTo(map).bounce();
+        // console.log(emailP);
+        
+    </script>
+    <% } %>

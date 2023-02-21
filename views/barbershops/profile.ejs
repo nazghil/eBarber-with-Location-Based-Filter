@@ -1,0 +1,100 @@
+<%- include ("../partials/barbernavbar.ejs") -%>
+
+<style>
+
+::-webkit-scrollbar {
+        width: 0;  /* Remove scrollbar space */
+        background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+    
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  /* border-radius: 5px; */
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.heading {
+	font-family: "Montserrat", Arial, sans-serif;
+	font-size: 4rem;
+	font-weight: 500;
+	line-height: 1.5;
+	text-align: center;
+	padding: 3.5rem 0;
+	color: #1a1a1a;
+    padding-top: 50px;
+
+}
+
+.heading span {
+	display: block;
+    font-size: 2.5rem;
+    font-family: 'Montserrat';
+    font-weight: normal;
+    color: #444;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.profile {
+    width: 100%;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); */
+}
+</style>
+<body>
+
+<h1 class="heading"><span>PROFILE USER</span></h1>
+
+<div class="profile">
+  <form method="post" action="/api/barbershops/updateprofile">
+    <label for="fname">Barbershop Name</label>
+    <input value="<%= barbershopName %>" type="text" id="fname" name="barbershopName" placeholder="<%= barbershopName %>">
+
+    <label for="lname">Barbershop Contact</label>
+    <input type="text" id="lname" name="barbershopContact" placeholder="<%= barbershopContact %>" readonly>
+
+    <label for="lname">Email</label>
+    <input value="<%= email %>" type="text" id="lname" name="email" placeholder="<%= email %>">
+
+    <label for="lname">Barbershop Address</label>
+    <input type="text" id="lname" name="barbershopAddress" placeholder="<%= barbershopAddress %>" readonly>
+
+    <label for="lname">Description</label>
+    <input value="<%= description %>" type="text" id="lname" name="description" placeholder="<%= description %>">
+
+    <label for="lname">Price Range</label>
+    <input value="<%= price %>" type="text" id="lname" name="price" placeholder="<%= price %>">
+
+    <input type="submit" value="Update">
+  </form>
+</div>
+
+</body>
+</html>
